@@ -5,15 +5,8 @@
         <link name="{side}_wheel_link">
             <visual>
                 <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
-
-
                 <geometry>
-                    <xacro:if value="${mesh_file == ''}">
-                        <cylinder radius="${radius}" length="${width}" />
-                    </xacro:if>
-                    <xacro:unless value="${mesh_file == ''}">
-                        <mesh filename="${mesh_file}" scale="1 1 1" />
-                    </xacro:unless>
+                    <cylinder radius="${radius}" length="${width}" />
                 </geometry>
                 <material name="blue">
                     <color rgba="0.1764 0.4588 0.8509 1.0" />

@@ -8,12 +8,7 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <xacro:if value="${mesh_file == ''}">
-                        <box size="${length} ${width} ${height}" />
-                    </xacro:if>
-                    <xacro:unless value="${mesh_file == ''}">
-                        <mesh filename="${mesh_file}" scale="1 1 1" />
-                    </xacro:unless>
+                    <box size="${length} ${width} ${height}" />
                 </geometry>
                 <material name="yellow">
                     <color rgba="0.8784 0.6627 0.6627 1.0" />
