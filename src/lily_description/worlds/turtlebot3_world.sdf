@@ -31,12 +31,12 @@ angular: {x: 0.0, y: 0.0, z: -0.1}}"
             name="gz::sim::systems::SceneBroadcaster">
         </plugin>
 
-        <model name="turtlebot3_world">
+        <!-- <model name="turtlebot3_world">
             <static>1</static>
             <include>
                 <uri>model://turtlebot3_world</uri>
             </include>
-        </model>
+        </model> -->
 
         <light name="sun" type="directional">
             <cast_shadows>true</cast_shadows>
