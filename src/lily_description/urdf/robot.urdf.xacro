@@ -2,9 +2,10 @@
 <robot name="lily" xmlns:xacro="http://ros.org/wiki/xacro">
 
     <!-- INCLUDE -->
-    <xacro:include filename="$(find lily_description)/urdf/mech/joint.urdf.xacro" />
-    <xacro:include filename="$(find lily_description)/urdf/mech/base.urdf.xacro" />
-    <xacro:include filename="$(find lily_description)/urdf/mech/wheel.urdf.xacro" />
+    <xacro:include filename="$(find lily_description)/urdf/mechanic_part/thigh.urdf.xacro" />
+    <xacro:include filename="$(find lily_description)/urdf/mechanic_part/knee.urdf.xacro" />
+    <xacro:include filename="$(find lily_description)/urdf/mechanic_part/base.urdf.xacro" />
+    <xacro:include filename="$(find lily_description)/urdf/mechanic_part/wheel.urdf.xacro" />
     <xacro:include filename="$(find lily_description)/urdf/sensors/plugins.urdf.xacro" />
     <xacro:include filename="$(find lily_description)/urdf/sensors/imu.urdf.xacro" />
     <xacro:include filename="$(find lily_description)/urdf/sensors/lidar.urdf.xacro" />
@@ -18,7 +19,7 @@
     <xacro:property name="base_mass" value="10" />
 
 
-    <xacro:property name="wheel_radius" value="0.07162" />
+    <xacro:property name="wheel_radius" value="0.09" />
     <xacro:property name="wheel_width" value="0.05" />
     <xacro:property name="wheel_pos_x" value="0.120" />
     <xacro:property name="wheel_pos_y" value="0.1355" />
@@ -26,8 +27,11 @@
     <xacro:property name="wheel_mass" value=".6" />
     <xacro:property name="wheel_torque" value="20" />
 
-    <xacro:property name="thigh_pos_x" value="${base_width/2}" />
-    <xacro:property name="thigh_pos_y" value="0" />
+    <xacro:property name="thigh_length" value="0.9" />
+    <xacro:property name="thigh_width" value="0.07" />
+    <xacro:property name="thigh_height" value="0.07" />
+    <xacro:property name="thigh_pos_x" value="${thigh_length/2}" />
+    <xacro:property name="thigh_pos_y" value="${base_width/2}" />
     <xacro:property name="thigh_pos_z" value="0" />
 
     <!-- FUNCTION(SETUP) -->
@@ -41,12 +45,72 @@
         wheel_pos_z="${wheel_pos_z}"
     />
 
-    <xacro:joint
+    <xacro:thigh
         frame_id="left_thigh"
         parent="base_link"
         pos_x="${thigh_pos_x}"
         pos_y="${thigh_pos_y}"
-        pos_z="${thigh_pos_z}" />
+        pos_z="${thigh_pos_z}"
+        length="${thigh_length}"
+        width="${thigh_width}"
+        height="${thigh_height}"
+        mass=".6" />
+
+    <xacro:thigh
+        frame_id="right_thigh"
+        parent="base_link"
+        pos_x="${thigh_pos_x}"
+        pos_y="${-thigh_pos_y}"
+        pos_z="${thigh_pos_z}"
+        length="${thigh_length}"
+        width="${thigh_width}"
+        height="${thigh_height}"
+        mass=".6" />
+
+    <xacro:knee
+        frame_id="left_knee"
+        parent="left_thigh"
+        pos_x="${thigh_length+(thigh_length/2)}"
+        pos_y="0"
+        pos_z="0"
+        length="${thigh_length}"
+        width="${thigh_width}"
+        height="${thigh_height}"
+        mass=".6" />
+
+    <xacro:knee
+        frame_id="right_knee"
+        parent="right_thigh"
+        pos_x="${thigh_length+(thigh_length/2)}"
+        pos_y="0"
+        pos_z="0"
+        length="${thigh_length}"
+        width="${thigh_width}"
+        height="${thigh_height}"
+        mass=".6" />
+
+    <xacro:wheel
+        side="left"
+        parent="left_knee_joint_link"
+        radius="${wheel_radius}"
+        width="${wheel_width}"
+        pos_x="${thigh_length}"
+        pos_y="${thigh_width/2}"
+        pos_z="0"
+        mass="${wheel_mass}"
+    />
+
+
+    <xacro:wheel
+        side="right"
+        parent="right_knee_joint_link"
+        radius="${wheel_radius}"
+        width="${wheel_width}"
+        pos_x="${thigh_length}"
+        pos_y="${-thigh_width/2}"
+        pos_z="0"
+        mass="${wheel_mass}"
+    />
 
     <xacro:depth_sensor name="eye">
         <origin xyz="${base_length/2} 0 ${base_height/2}" rpy="0 0 0" />

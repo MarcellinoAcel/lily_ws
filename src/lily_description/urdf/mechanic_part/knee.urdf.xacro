@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:macro name="knee" params="frame_id parent pos_x pos_y pos_z length width height mass">
+
+        <!-- LINK -->
+        <link name="${frame_id}_joint_link">
+
+            <visual>
+                <!-- Geometry centered on link frame -->
+                <origin xyz="${length/2} 0 0" rpy="${pi/2} 0 0" />
+                <geometry>
+                    <box size="${length} ${width} ${height}" />
+                </geometry>
+                <material name="yellow">
+                    <color rgba="0.0 0.0 0.6627 1.0" />
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="${length/2} 0 0" rpy="0 0 0" />
+                <geometry>
+                    <box size="${length} ${width} ${height}" />
+                </geometry>
+            </collision>
+
+            <inertial>
+                <origin xyz="${length/2} 0 0" rpy="0 0 0" />
+                <mass value="${mass}" />
+                <inertia
+                    ixx="${(1.0/12.0) * mass * ((width*width) + (height*height))}"
+                    ixy="0.0"
+                    ixz="0.0"
+                    iyy="${(1.0/12.0) * mass * ((length*length) + (height*height))}"
+                    iyz="0.0"
+                    izz="${(1.0/12.0) * mass * ((length*length) + (width*width))}" />
+            </inertial>
+
+        </link>
+
+        <!-- GAZEBO MATERIAL (correct reference) -->
+        <gazebo reference="${frame_id}_joint_link">
+            <material>Gazebo/Yellow</material>
+        </gazebo>
+
+        <!-- JOINT -->
+        <joint name="${frame_id}_joint" type="revolute">
+            <parent link="${parent}_joint_link" />
+            <child link="${frame_id}_joint_link" />
+            <origin xyz="${pos_x - (length/2)} ${pos_y} ${pos_z}" rpy="0 0 0" />
+            <axis xyz="0 1 0" />
+            <limit lower="-1.57"
+                upper="1.57"
+                effort="50"
+                velocity="5.0" />
+        </joint>
+
+    </xacro:macro>
+
+</robot>
