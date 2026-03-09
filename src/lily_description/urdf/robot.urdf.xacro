@@ -2,6 +2,7 @@
 <robot name="lily" xmlns:xacro="http://ros.org/wiki/xacro">
 
     <!-- INCLUDE -->
+    <xacro:include filename="$(find lily_description)/urdf/declaration.urdf.xacro" />
     <xacro:include filename="$(find lily_description)/urdf/mechanic_part/thigh.urdf.xacro" />
     <xacro:include filename="$(find lily_description)/urdf/mechanic_part/knee.urdf.xacro" />
     <xacro:include filename="$(find lily_description)/urdf/mechanic_part/base.urdf.xacro" />
@@ -11,28 +12,11 @@
     <xacro:include filename="$(find lily_description)/urdf/sensors/lidar.urdf.xacro" />
     <xacro:include filename="$(find lily_description)/urdf/sensors/camera.urdf.xacro" />
     <xacro:include filename="$(find lily_description)/urdf/controller/ros2_control.urdf.xacro" />
-    <!-- DECLARATION -->
-
-    <xacro:property name="base_length" value="0.200" />
-    <xacro:property name="base_width" value="0.445" />
-    <xacro:property name="base_height" value="0.129" />
-    <xacro:property name="base_mass" value="10" />
-
-
-    <xacro:property name="wheel_radius" value="0.09" />
-    <xacro:property name="wheel_width" value="0.05" />
-    <xacro:property name="wheel_mass" value=".6" />
-    <xacro:property name="wheel_torque" value="20" />
-
-    <xacro:property name="thigh_length" value="0.9" />
-    <xacro:property name="thigh_width" value="0.07" />
-    <xacro:property name="thigh_height" value="0.07" />
-    <xacro:property name="thigh_pos_x" value="${thigh_length/2}" />
-    <xacro:property name="thigh_pos_y" value="${(base_width/2) + (thigh_width/2)}" />
-    <xacro:property name="thigh_pos_z" value="0" />
+    <xacro:include filename="$(find lily_description)/urdf/controller/diff_drive.urdf.xacro" />
 
     <!-- FUNCTION(SETUP) -->
     <xacro:lily_ros2_control />
+    <xacro:lily_diff_drive_control />
     <xacro:base
         length="${base_length}"
         width="${base_width}"

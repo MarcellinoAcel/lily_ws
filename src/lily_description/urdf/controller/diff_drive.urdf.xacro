@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:include filename="$(find lily_description)/urdf/declaration.urdf.xacro" />
+    <xacro:macro name="lily_diff_drive_control">
+
+        <ros2_control name="LilyDiffDriveSystem" type="system">
+
+            <hardware>
+                <plugin>gz_ros2_control/GazeboSimSystem</plugin>  <!-- ← real Gazebo connection -->
+            </hardware>
+            <joint name="left_wheel_joint">
+                <command_interface name="velocity" />
+                <state_interface name="velocity" />
+                <state_interface name="position" />
+            </joint>
+            <joint name="right_wheel_joint">
+                <command_interface name="velocity" />
+                <state_interface name="velocity" />
+                <state_interface name="position" />
+            </joint>
+
+        </ros2_control>
+        <gazebo>
+            <plugin filename="gz-sim-diff-drive-system"
+                name="gz::sim::systems::DiffDrive">
+                <left_joint>left_wheel_joint</left_joint>
+                <right_joint>right_wheel_joint</right_joint>
+                <wheel_separation>${thigh_pos_y + (thigh_width/2) + (thigh_width/2)}</wheel_separation>  <!-- measure your robot -->
+                <wheel_radius>${wheel_radius}</wheel_radius>          <!-- measure your robot -->
+                <topic>cmd_vel</topic>
+                <odom_topic>odom</odom_topic>
+                <frame_id>odom</frame_id>
+                <child_frame_id>base_link</child_frame_id>
+            </plugin>
+        </gazebo>
+    </xacro:macro>
+
+</robot>
