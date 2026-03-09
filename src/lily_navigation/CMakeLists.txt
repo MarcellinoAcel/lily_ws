@@ -14,6 +14,8 @@ find_package(geometry_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(rclcpp_action REQUIRED)
+find_package(trajectory_msgs REQUIRED)
+find_package(control_msgs REQUIRED)
 
 add_executable(lily_nav src/lily_nav.cpp)
 target_include_directories(lily_nav PUBLIC
@@ -29,6 +31,8 @@ ament_target_dependencies(
   "tf2"
   "tf2_ros"
   "rclcpp_action"
+  "control_msgs"
+  "trajectory_msgs"
 )
 
 install(TARGETS lily_nav

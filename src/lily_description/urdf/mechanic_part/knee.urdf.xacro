@@ -48,7 +48,7 @@
             <child link="${frame_id}_joint_link" />
             <origin xyz="${pos_x - (length/2)} ${pos_y} ${pos_z}" rpy="0 0 0" />
             <axis xyz="0 1 0" />
-            <limit lower="-1.57"
+            <limit lower="-3.14"
                 upper="1.57"
                 effort="50"
                 velocity="5.0" />
