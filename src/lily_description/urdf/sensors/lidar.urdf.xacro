@@ -2,10 +2,10 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
     <xacro:property name="M_PI" value="3.1415926535897931" />
     <xacro:macro name="laser"
-        params="name pos_x pos_y pos_z update_rate ray_count min_angle max_angle min_range max_range frame_id topic_name">
-        <link name="$frame_id}">
+        params="name parent *origin update_rate ray_count min_angle max_angle min_range max_range frame_id topic_name">
+        <link name="${frame_id}">
             <visual>
-                <origin xyz="0 0 -0.025" rpy="0 0 0" />
+                <xacro:insert_block name="origin" />
                 <geometry>
                     <cylinder radius="0.0375" length="0.05" />
                 </geometry>
@@ -15,7 +15,7 @@
             </visual>
 
             <collision>
-                <origin xyz="0 0 -0.025" rpy="0 0 0" />
+                <xacro:insert_block name="origin" />
                 <geometry>
                     <cylinder radius="0.0375" length="0.05" />
                 </geometry>
@@ -42,7 +42,7 @@
         </gazebo>
 
         <joint name="${frame_id}_to_base_link" type="fixed">
-            <parent link="base_link" />
+            <parent link="${parent}" />
             <child link="${frame_id}" />
             <xacro:insert_block name="origin" />
         </joint>
@@ -66,8 +66,8 @@
                         <vertical>
                             <samples>1</samples>
                             <resolution>1</resolution>
-                            <min_angle>0.0</min_angle>
-                            <max_angle>0.0</max_angle>
+                            <min_angle>-0.2618</min_angle>
+                            <max_angle>0.2618</max_angle>
                         </vertical>
                     </scan>
                     <range>

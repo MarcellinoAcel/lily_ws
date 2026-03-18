@@ -50,7 +50,7 @@
             <axis xyz="0 1 0" />
             <limit lower="0.0"
                 upper="3.14"
-                effort="50"
+                effort="100"
                 velocity="5.0" />
         </joint>
 

@@ -15,7 +15,7 @@ def generate_launch_description():
     world_path = PathJoinSubstitution([
         FindPackageShare('lily_description'),
         'worlds',
-        'turtlebot3_world.sdf'
+        'turtlebot3_world_1.sdf'
     ])
 
     urdf_path = PathJoinSubstitution([
@@ -46,7 +46,7 @@ def generate_launch_description():
         DeclareLaunchArgument(name='rviz', default_value='false'),
 
         ExecuteProcess(
-            cmd=['gz', 'sim', '-r', world_path],
+            cmd=['gz', 'sim','--fullscreen', '-r', world_path],
             output='screen'
         ),
 

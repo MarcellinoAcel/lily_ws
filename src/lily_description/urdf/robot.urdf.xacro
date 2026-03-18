@@ -95,5 +95,18 @@
         <origin xyz="${base_length/2} 0 ${base_height/2}" rpy="0 0 0" />
     </xacro:depth_sensor>
 
+    <xacro:laser
+        name="lidar"
+        parent ="base_link"
+        update_rate="10"
+        ray_count="64"
+        min_angle="-1.39626340159"
+        max_angle="1.39626340159"
+        min_range="0.1"
+        max_range="10.0"
+        frame_id="lidar_link"
+        topic_name="/scan">
+        <origin xyz="0 0 ${(base_height/2) -  0.025 }" rpy="0 0 0" />
+    </xacro:laser>
     <xacro:imu />
 </robot>

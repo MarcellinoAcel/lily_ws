@@ -16,6 +16,7 @@ find_package(tf2_ros REQUIRED)
 find_package(rclcpp_action REQUIRED)
 find_package(trajectory_msgs REQUIRED)
 find_package(control_msgs REQUIRED)
+find_package(behaviortree_cpp_v3 REQUIRED)
 
 add_executable(lily_nav src/lily_nav.cpp)
 target_include_directories(lily_nav PUBLIC
@@ -33,6 +34,7 @@ ament_target_dependencies(
   "rclcpp_action"
   "control_msgs"
   "trajectory_msgs"
+  "behaviortree_cpp_v3"
 )
 
 install(TARGETS lily_nav

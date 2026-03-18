@@ -8,14 +8,15 @@
 #include "control_msgs/action/follow_joint_trajectory.hpp"
 #include "trajectory_msgs/msg/joint_trajectory_point.hpp"
 #include "sensor_msgs/msg/joint_state.hpp"
+#include "geometry_msgs/msg/twist.hpp"
 
 using FollowJointTrajectory = control_msgs::action::FollowJointTrajectory;
 using GoalHandleFJT = rclcpp_action::ClientGoalHandle<FollowJointTrajectory>;
 
-class LegTrajectoryActionClient
+class LegMove
 {
 public:
-    explicit LegTrajectoryActionClient()
+    explicit LegMove()
     {
         node_ = std::make_shared<rclcpp::Node>("leg_trajectory_action_client");
         client_ = rclcpp_action::create_client<FollowJointTrajectory>(
@@ -30,7 +31,8 @@ public:
 
         joint_state_sub_ = node_->create_subscription<sensor_msgs::msg::JointState>(
             "/joint_states", 10,
-            std::bind(&LegTrajectoryActionClient::joint_state_callback, this, std::placeholders::_1));
+            std::bind(&LegMove::joint_state_callback, this, std::placeholders::_1));
+        cmd_pub_ = node_->create_publisher<geometry_msgs::msg::Twist>("/cmd_vel", 10);
     }
     rclcpp::Node::SharedPtr get_node()
     {
@@ -230,8 +232,11 @@ public:
 private:
     rclcpp::Node::SharedPtr node_;
     rclcpp_action::Client<FollowJointTrajectory>::SharedPtr client_;
+
     rclcpp::Subscription<sensor_msgs::msg::JointState>::SharedPtr joint_state_sub_;
     std::map<std::string, double> joint_positions_;
+
+    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_pub_;
 
     void joint_state_callback(const sensor_msgs::msg::JointState::SharedPtr msg)
     {
