@@ -46,7 +46,7 @@ def generate_launch_description():
         DeclareLaunchArgument(name='rviz', default_value='false'),
 
         ExecuteProcess(
-            cmd=['gz', 'sim','--fullscreen', '-r', world_path],
+            cmd=['gz', 'sim', '-r', world_path],
             output='screen'
         ),
 
