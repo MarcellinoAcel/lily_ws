@@ -1,29 +1,44 @@
 #pragma once
 #include <algorithm>
 
-struct PID
-{
-    double kp, ki, kd;
-    double i_term = 0;
-    double last_err = 0;
-    double out_min, out_max;
+class PIDController {
+public:
+    PIDController(double kp, double ki, double kd)
+        : kp_(kp), ki_(ki), kd_(kd),
+          integral_(0.0), prev_error_(0.0), initialized_(false) {}
 
-    PID(double kp_, double ki_, double kd_, double min_, double max_)
-        : kp(kp_), ki(ki_), kd(kd_), out_min(min_), out_max(max_) {}
-
-    double update(double err, double dt)
-    {
-        i_term += err * dt;
-        double d = (err - last_err) / dt;
-        last_err = err;
-
-        double out = kp * err + ki * i_term + kd * d;
-        return std::clamp(out, out_min, out_max);
+    void reset() {
+        integral_ = 0.0;
+        prev_error_ = 0.0;
+        initialized_ = false;
     }
 
-    void reset()
-    {
-        i_term = 0;
-        last_err = 0;
+    void setGains(double kp, double ki, double kd) {
+        kp_ = kp; ki_ = ki; kd_ = kd;
     }
+
+    // Returns correction output. Call at fixed dt intervals.
+    double compute(double error, double dt) {
+        if (!initialized_) {
+            prev_error_ = error;
+            initialized_ = true;
+        }
+
+        integral_ += error * dt;
+
+        // Anti-windup: clamp integral contribution
+        const double integral_limit = 0.5;
+        integral_ = std::clamp(integral_, -integral_limit, integral_limit);
+
+        double derivative = (dt > 0.0) ? (error - prev_error_) / dt : 0.0;
+        prev_error_ = error;
+
+        return (kp_ * error) + (ki_ * integral_) + (kd_ * derivative);
+    }
+
+private:
+    double kp_, ki_, kd_;
+    double integral_;
+    double prev_error_;
+    bool initialized_;
 };
