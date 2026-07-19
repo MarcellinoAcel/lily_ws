@@ -13,13 +13,13 @@ def generate_launch_description():
     use_sim_time = True
 
     world_path = PathJoinSubstitution([
-        FindPackageShare('lily_description'),
+        FindPackageShare('arc_description'),
         'worlds',
         'turtlebot3_world_1.sdf'
     ])
 
     urdf_path = PathJoinSubstitution([
-        FindPackageShare("lily_description"),
+        FindPackageShare("arc_description"),
         "urdf",
         "robot.urdf.xacro"
     ])
@@ -30,11 +30,11 @@ def generate_launch_description():
     )
 
     description_launch_path = PathJoinSubstitution(
-        [FindPackageShare('lily_description'), 'launch', 'description.launch.py']
+        [FindPackageShare('arc_description'), 'launch', 'description.launch.py']
     )
 
     rviz_config_path = PathJoinSubstitution(
-        [FindPackageShare("lily_description"), "rviz", "model_description.rviz"]
+        [FindPackageShare("arc_description"), "rviz", "model_description.rviz"]
     )
 
     return LaunchDescription([
@@ -56,7 +56,7 @@ def generate_launch_description():
             output='screen',
             arguments=[
                 '-topic', 'robot_description',
-                '-entity', 'lily',
+                '-entity', 'arc',
                 '-x', LaunchConfiguration('spawn_x'),
                 '-y', LaunchConfiguration('spawn_y'),
                 '-z', LaunchConfiguration('spawn_z'),

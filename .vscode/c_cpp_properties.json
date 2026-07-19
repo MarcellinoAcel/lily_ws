@@ -5,7 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/opt/ros/jazzy/include/**",
-                "${workspaceFolder}/src/lily_navigation/include/**"
+                "${workspaceFolder}/src/arc_navigation/include/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",

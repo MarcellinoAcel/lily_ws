@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(lily_navigation)
+project(arc_navigation)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -18,13 +18,13 @@ find_package(trajectory_msgs REQUIRED)
 find_package(control_msgs REQUIRED)
 find_package(behaviortree_cpp_v3 REQUIRED)
 
-add_executable(lily_nav src/lily_nav.cpp)
-target_include_directories(lily_nav PUBLIC
+add_executable(arc_nav src/arc_nav.cpp)
+target_include_directories(arc_nav PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include/${PROJECT_NAME}>)
-target_compile_features(lily_nav PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+target_compile_features(arc_nav PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
 ament_target_dependencies(
-  lily_nav
+  arc_nav
   "rclcpp"
   "nav_msgs"
   "sensor_msgs"
@@ -37,7 +37,7 @@ ament_target_dependencies(
   "behaviortree_cpp_v3"
 )
 
-install(TARGETS lily_nav
+install(TARGETS arc_nav
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

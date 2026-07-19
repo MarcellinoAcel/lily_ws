@@ -9,11 +9,11 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
 
     urdf_path = PathJoinSubstitution(
-        [FindPackageShare("lily_description"), "urdf", "robot.urdf.xacro"]
+        [FindPackageShare("arc_description"), "urdf", "robot.urdf.xacro"]
     )
 
     rviz_config_path = PathJoinSubstitution(
-        [FindPackageShare("lily_description"), "rviz", "model_description.rviz"]
+        [FindPackageShare("arc_description"), "rviz", "model_description.rviz"]
     )
 
     return LaunchDescription([

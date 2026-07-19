@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-    <xacro:include filename="$(find lily_description)/urdf/declaration.urdf.xacro" />
-    <xacro:macro name="lily_diff_drive_control">
+    <xacro:include filename="$(find arc_description)/urdf/declaration.urdf.xacro" />
+    <xacro:macro name="arc_diff_drive_control">
 
-        <ros2_control name="LilyDiffDriveSystem" type="system">
+        <ros2_control name="arcDiffDriveSystem" type="system">
 
             <hardware>
                 <plugin>gz_ros2_control/GazeboSimSystem</plugin>  <!-- ← real Gazebo connection -->

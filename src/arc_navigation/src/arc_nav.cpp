@@ -1,6 +1,6 @@
-#include "lily_navigation/actuator.hpp"
-#include "lily_navigation/pid.hpp"
-#include "lily_navigation/kinematic.hpp"
+#include "arc_navigation/actuator.hpp"
+#include "arc_navigation/pid.hpp"
+#include "arc_navigation/kinematic.hpp"
 #include "behaviortree_cpp_v3/behavior_tree.h"
 
 #include <sensor_msgs/msg/imu.hpp>
@@ -73,7 +73,7 @@ class BalanceNode : public rclcpp::Node
 {
 public:
     explicit BalanceNode(Actuator &actuator, const BalanceConfig &cfg)
-        : Node("lily_balance_node"),
+        : Node("arc_balance_node"),
           actuator_(actuator),
           cfg_(cfg),
           pid_(cfg.kp, cfg.ki, cfg.kd),

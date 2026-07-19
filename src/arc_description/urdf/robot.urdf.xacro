@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
-<robot name="lily" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="arc" xmlns:xacro="http://ros.org/wiki/xacro">
 
     <!-- INCLUDE -->
-    <xacro:include filename="$(find lily_description)/urdf/declaration.urdf.xacro" />
-    <xacro:include filename="$(find lily_description)/urdf/mechanic_part/thigh.urdf.xacro" />
-    <xacro:include filename="$(find lily_description)/urdf/mechanic_part/knee.urdf.xacro" />
-    <xacro:include filename="$(find lily_description)/urdf/mechanic_part/base.urdf.xacro" />
-    <xacro:include filename="$(find lily_description)/urdf/mechanic_part/wheel.urdf.xacro" />
-    <xacro:include filename="$(find lily_description)/urdf/sensors/plugins.urdf.xacro" />
-    <xacro:include filename="$(find lily_description)/urdf/sensors/imu.urdf.xacro" />
-    <xacro:include filename="$(find lily_description)/urdf/sensors/lidar.urdf.xacro" />
-    <xacro:include filename="$(find lily_description)/urdf/sensors/camera.urdf.xacro" />
-    <xacro:include filename="$(find lily_description)/urdf/controller/ros2_control.urdf.xacro" />
-    <xacro:include filename="$(find lily_description)/urdf/controller/diff_drive.urdf.xacro" />
+    <xacro:include filename="$(find arc_description)/urdf/declaration.urdf.xacro" />
+    <xacro:include filename="$(find arc_description)/urdf/mechanic_part/thigh.urdf.xacro" />
+    <xacro:include filename="$(find arc_description)/urdf/mechanic_part/knee.urdf.xacro" />
+    <xacro:include filename="$(find arc_description)/urdf/mechanic_part/base.urdf.xacro" />
+    <xacro:include filename="$(find arc_description)/urdf/mechanic_part/wheel.urdf.xacro" />
+    <xacro:include filename="$(find arc_description)/urdf/sensors/plugins.urdf.xacro" />
+    <xacro:include filename="$(find arc_description)/urdf/sensors/imu.urdf.xacro" />
+    <xacro:include filename="$(find arc_description)/urdf/sensors/lidar.urdf.xacro" />
+    <xacro:include filename="$(find arc_description)/urdf/sensors/camera.urdf.xacro" />
+    <xacro:include filename="$(find arc_description)/urdf/controller/ros2_control.urdf.xacro" />
+    <xacro:include filename="$(find arc_description)/urdf/controller/diff_drive.urdf.xacro" />
 
     <!-- FUNCTION(SETUP) -->
-    <xacro:lily_ros2_control />
-    <xacro:lily_diff_drive_control />
+    <xacro:arc_ros2_control />
+    <xacro:arc_diff_drive_control />
     <xacro:base
         length="${base_length}"
         width="${base_width}"

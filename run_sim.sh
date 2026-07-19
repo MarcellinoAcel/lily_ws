@@ -5,7 +5,7 @@ export __NV_PRIME_RENDER_OFFLOAD=1;
 export __GLX_VENDOR_LIBRARY_NAME=nvidia;
 export __VK_LAYER_NV_optimus=NVIDIA_only;
 export GZ_SIM_SYSTEM_PLUGIN_PATH=/opt/ros/jazzy/lib:$GZ_SIM_SYSTEM_PLUGIN_PATH;
-ros2 launch lily_description gazebo.launch.py;
+ros2 launch arc_description gazebo.launch.py;
 echo Press anykey to close;
 read -n 1;"
 
@@ -21,6 +21,6 @@ gz service -s /gui/move_to/pose \
 sleep 3
 
 gnome-terminal --tab --title="ACTUATOR" -- bash -c "source install/setup.bash;
-ros2 run lily_navigation lily_nav;
+ros2 run arc_navigation arc_nav;
 echo Press anykey to close;
 read -n 1;"
